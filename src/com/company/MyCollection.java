@@ -69,9 +69,13 @@ public class MyCollection<E> implements Collection<E> {
 
     @Override
     public boolean contains(Object o) {
-        for (Object x : elementData) {
+        for (int i = 0; i < size; i++) {
             if (o != null) {
-                if (o.equals(x)) {
+                if (o.equals(elementData[i])) {
+                    return true;
+                }
+            }else {
+                if (null == (elementData[i])) {
                     return true;
                 }
             }
@@ -94,6 +98,16 @@ public class MyCollection<E> implements Collection<E> {
         for (int i = 0; i < size; i++) {
             if (o != null) {
                 if (o.equals(elementData[i])) {
+                    Object[] arrRem = new Object[elementData.length];
+                    // https://javarush.ru/help/9543
+                    System.arraycopy(elementData, 0, arrRem, 0, i);
+                    System.arraycopy(elementData, i + 1, arrRem, i, elementData.length - 1 - i);
+                    elementData = arrRem;
+                    size--;
+                    return true;
+                }
+            } else {
+                if (null == (elementData[i])) {
                     Object[] arrRem = new Object[elementData.length];
                     // https://javarush.ru/help/9543
                     System.arraycopy(elementData, 0, arrRem, 0, i);
