@@ -74,7 +74,7 @@ public class MyCollection<E> implements Collection<E> {
                 if (o.equals(elementData[i])) {
                     return true;
                 }
-            }else {
+            } else {
                 if (null == (elementData[i])) {
                     return true;
                 }
@@ -128,7 +128,13 @@ public class MyCollection<E> implements Collection<E> {
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        return false;
+        if (c.isEmpty()) {
+            return false;
+        }
+        for (E x : c) {
+            add(x);
+        }
+        return true;
     }
 
     @Override
